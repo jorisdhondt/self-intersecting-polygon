@@ -216,13 +216,12 @@ def main(path):
     
     
 if __name__ == '__main__':
-    #parser = arg.ArgumentParser(description='Area calculater for irregular polygon')
-    #parser.add_argument('path', help='path to a ASCII file listing the ordered cartesian coordinates, one per line in format (x,y)')
+    parser = arg.ArgumentParser(description='Area calculater for irregular polygon')
+    parser.add_argument('path', help='path to a ASCII file listing the ordered cartesian coordinates, one per line in format (x,y)')
 
-    #args = parser.parse_args()
-    #path = args.path    
-    #path = expanduser("~")+'/codebase/VARIOUS/coor6_double_coor.txt'
-    path='/Users/jdhondt/codebase/PYTHON/VARIOUS/coor6double.txt'
+    args = parser.parse_args()
+    path = args.path
+
     
     main(path)    
     
