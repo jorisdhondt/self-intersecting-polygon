@@ -9,15 +9,14 @@ from matplotlib import collections  as mc
 import numpy as np
 
 
-#Function calculates the area described by <coordinates> using the shoelace formula
 def calculate_area(coordinates):
+    '''Function calculates the area described by <coordinates> using the shoelace formula'''
     x, y = zip(*coordinates)
     return 0.5*np.abs(np.dot(x,np.roll(y,1))-np.dot(y,np.roll(x,1)))  #implementation of shoelace formula
 
 
-#Function calculates the coefficients of the general equation form of a line (segment).  The general equation is in the form Ax + By + C = 0
 def line_coefficients(inputSegment):
-    
+    '''Function calculates the coefficients of the general equation form of a line (segment).  The general equation is in the form Ax + By + C = 0'''
     startVertex = inputSegment[0]
     endVertex = inputSegment[1]  
     
@@ -33,9 +32,8 @@ def line_coefficients(inputSegment):
     C = startVertex[0]*endVertex[1] - endVertex[0]*startVertex[1]
     return A, B, C
 
-#Function calculates the coefficients of the general equation form of a line (segment).  The general equation is in the form Ax + By + C = 0
 def intersect_segments(S1,S2):
-    
+    '''Function calculates the coefficients of the general equation form of a line (segment).  The general equation is in the form Ax + By + C = 0'''
     startVertexS1 = S1[0]
     endVertexS1 = S1[1]
     startVertexS2 = S2[0]
@@ -65,19 +63,18 @@ def intersect_segments(S1,S2):
     else: # parallel
         return None 
 
-#Function returns the (x,y) intersection point of two lines L1 and L2.  Both lines are described by their (A,B,C) coefficients. 
-#The implementation is based on Cramer's rule:
-# A1*x + B1*y + C = 0   (L1)
-# A2*x + B2*y + C = 0   (L2)
-#
-# Intersection of both lines is defined as:
-# x = (C2 * B1 - C1 * B2) / (A1 * B2 - A2 * B1)
-# y = (A2 * C1 - A1 * C2) / (A1 * B1 - A2 * B1)
-#
-# if L1 & L2 are parellel, the denominator equals to zero 
-
-
 def intersect_lines(L1, L2):
+    '''Function returns the (x,y) intersection point of two lines L1 and L2.  Both lines are described by their (A,B,C) coefficients. '''
+
+    #The implementation is based on Cramer's rule:
+    # A1*x + B1*y + C = 0   (L1)
+    # A2*x + B2*y + C = 0   (L2)
+    #
+    # Intersection of both lines is defined as:
+    # x = (C2 * B1 - C1 * B2) / (A1 * B2 - A2 * B1)
+    # y = (A2 * C1 - A1 * C2) / (A1 * B1 - A2 * B1)
+    #
+    # if L1 & L2 are parellel, the denominator equals to zero 
     denominator  = L1[0] * L2[1] - L2[0] * L1[1]  #L1 is a tuple with form (A1,B1,C1), similar for L2
     numeratorX = L1[1] * L2[2] - L1[2] * L2[1]
     numeratorY = L1[2] * L2[0] - L1[0] * L2[2] 
